@@ -24,9 +24,12 @@ FROM alpine:3.8
 COPY --from=builder /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/ca-certificates.crt
 COPY --from=builder /go/src/github.com/pusher/oauth2_proxy/oauth2_proxy /bin/oauth2_proxy
 COPY --from=builder /go/src/github.com/pusher/oauth2_proxy/jwt_signing_key.pem /etc/ssl/private/jwt_signing_key.pem
+COPY entrypoint.sh entrypoint.sh
 
+RUN apk add --no-cache bash
+RUN chmod +x entrypoint.sh
 RUN addgroup -S -g 2000 oauth2proxy && adduser -S -u 2000 oauth2proxy -G oauth2proxy
 USER oauth2proxy
 
-ENTRYPOINT ./entrypoint.sh
-CMD ["/bin/oauth2_proxy"]
+ENTRYPOINT ["./entrypoint.sh"]
+CMD []

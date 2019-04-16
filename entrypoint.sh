@@ -6,4 +6,4 @@ if [ -f /run/secrets/environment ]; then
     source /run/secrets/environment
     set +a
 fi
-sh -c "$@"
+exec "$@"
