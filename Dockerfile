@@ -28,4 +28,5 @@ COPY --from=builder /go/src/github.com/pusher/oauth2_proxy/jwt_signing_key.pem /
 RUN addgroup -S -g 2000 oauth2proxy && adduser -S -u 2000 oauth2proxy -G oauth2proxy
 USER oauth2proxy
 
-ENTRYPOINT ["/bin/oauth2_proxy"]
+ENTRYPOINT ./entrypoint.sh
+CMD ["/bin/oauth2_proxy"]
