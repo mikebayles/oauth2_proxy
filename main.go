@@ -53,8 +53,8 @@ func main() {
 	flagSet.String("azure-tenant", "common", "go to a tenant-specific or common (tenant-independent) endpoint.")
 	flagSet.String("github-org", "", "restrict logins to members of this organisation")
 	flagSet.String("github-team", "", "restrict logins to members of this team")
-	flagSet.String("github-repo", "", "restrict logins to collaborators of this repo")
-	flagSet.String("github-owner-token", "", "owner token that has access to check collaborators of github-repo")
+	flagSet.String("github-repos", "", "restrict logins to collaborators of these repos")
+	flagSet.String("github-owner-token", "", "owner token that has access to check collaborators of github-repos")
 	flagSet.Var(&googleGroups, "google-group", "restrict logins to members of this google group (may be given multiple times).")
 	flagSet.String("google-admin-email", "", "the google admin to impersonate for api calls")
 	flagSet.String("google-service-account-json", "", "the path to the service account json credentials")
@@ -94,7 +94,8 @@ func main() {
 
 	flagSet.String("signature-key", "", "GAP-Signature request signature key (algorithm:secretkey)")
 	flagSet.String("acr-values", "http://idmanagement.gov/ns/assurance/loa/1", "acr values string:  optional, used by login.gov")
-	flagSet.String("jwt-key", "", "private key used to sign JWT: required by login.gov")
+	flagSet.String("jwt-key", "", "private key in PEM format used to sign JWT, so that you can say something like -jwt-key=\"${OAUTH2_PROXY_JWT_KEY}\": required by login.gov")
+	flagSet.String("jwt-key-file", "", "path to the private key file in PEM format used to sign the JWT so that you can say something like -jwt-key-file=/etc/ssl/private/jwt_signing_key.pem: required by login.gov")
 	flagSet.String("pubjwk-url", "", "JWK pubkey access endpoint: required by login.gov")
 	flagSet.Bool("gcp-healthchecks", false, "Enable GCP/GKE healthcheck endpoints")
 
